@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JN_Mission6.Migrations
 {
     [DbContext(typeof(MovieApplicationContext))]
-    [Migration("20240216172959_Initial")]
+    [Migration("20240216220652_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
