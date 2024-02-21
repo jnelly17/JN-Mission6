@@ -1,5 +1,6 @@
 using JN_Mission6.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -44,8 +45,7 @@ namespace JN_Mission6.Controllers
         public IActionResult Display ()
         {
             var applications = _context.Applications
-                //.Where(x => x.Rating == "PG-13")
-                //.OrderBy(x => x.Title)
+                .Include("Category")
                 .ToList();
 
             return View(applications);
