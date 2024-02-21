@@ -27,6 +27,9 @@ namespace JN_Mission6.Controllers
         [HttpGet]
         public IActionResult MovieForm()
         {
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryName).ToList();
+
             return View("MovieForm");
         }
         [HttpPost]
@@ -36,6 +39,16 @@ namespace JN_Mission6.Controllers
             _context.SaveChanges();
 
             return View("Confirmation");
+        }
+
+        public IActionResult Display ()
+        {
+            var applications = _context.Applications
+                //.Where(x => x.Rating == "PG-13")
+                //.OrderBy(x => x.Title)
+                .ToList();
+
+            return View(applications);
         }
 
     }
