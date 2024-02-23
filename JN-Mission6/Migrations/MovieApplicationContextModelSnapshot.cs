@@ -76,18 +76,17 @@ namespace JN_Mission6.Migrations
 
             modelBuilder.Entity("JN_Mission6.Models.MovieSubmit", b =>
                 {
-                    b.Property<int>("MovieID")
+                    b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("CopiedToPlex")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("Edited")
@@ -100,7 +99,6 @@ namespace JN_Mission6.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Rating")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -111,20 +109,18 @@ namespace JN_Mission6.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("MovieID");
+                    b.HasKey("MovieId");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Applications");
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("JN_Mission6.Models.MovieSubmit", b =>
                 {
                     b.HasOne("JN_Mission6.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
                 });

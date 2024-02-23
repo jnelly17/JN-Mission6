@@ -31,24 +31,87 @@ namespace JN_Mission6.Controllers
             ViewBag.Categories = _context.Categories
                 .OrderBy(x => x.CategoryName).ToList();
 
-            return View("MovieForm");
+            return View("MovieForm", new MovieSubmit());
         }
         [HttpPost]
         public IActionResult MovieForm(MovieSubmit response)
         {
-            _context.Applications.Add(response);
-            _context.SaveChanges();
 
-            return View("Confirmation");
+            if(ModelState.IsValid)
+            {
+                _context.Movies.Add(response);
+                _context.SaveChanges();
+
+                return View("Confirmation");
+            }
+            else
+            {
+                ViewBag.Categories = _context.Categories
+                    .OrderBy(x => x.CategoryName).ToList();
+
+                return View(response);
+            }
+
         }
 
         public IActionResult Display ()
         {
-            var applications = _context.Applications
+            var applications = _context.Movies
                 .Include("Category")
                 .ToList();
 
             return View(applications);
+        }
+
+        [HttpGet]
+        public IActionResult Edit (int id)
+        {
+
+            var recordToEdit = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryName).ToList();
+
+            return View("MovieForm", recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(MovieSubmit updateInfo)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _context.Update(updateInfo);
+                _context.SaveChanges();
+
+                return RedirectToAction("Display");
+            }
+            else
+            {
+                ViewBag.Categories = _context.Categories
+                    .OrderBy(x => x.CategoryName).ToList();
+
+                return View("MovieForm", updateInfo);
+            }
+            
+        }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(MovieSubmit deleteInfo)
+        {
+            _context.Movies.Remove(deleteInfo); //change applications andall other tables to "Movies"
+            _context.SaveChanges();
+
+            return RedirectToAction("Display");
         }
 
     }

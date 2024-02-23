@@ -8,6 +8,9 @@
 
 <div>
     <form method="post">
+
+        <input type="hidden" asp-for="MovieId" />
+
         <label asp-for="CategoryId">Category</label>
         <select asp-for="CategoryId">
             <option value="">Select a Category</option>
@@ -37,9 +40,8 @@
         <br />
         <label asp-for="Edited">Edited</label>
         <select asp-for="Edited">
-            <option value=""></option>
-            <option value="true">True</option>
-            <option value="false">False</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
         </select>
         <br />
         <label asp-for="LentTo">Lent to</label>
@@ -51,15 +53,16 @@
         <br />
         <label asp-for="CopiedToPlex">Copied to Plex</label>
         <select asp-for="CopiedToPlex">
-            <option value=""></option>
-            <option value="true">True</option>
-            <option value="false">False</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
         </select>
         <br />
         <label asp-for="Notes">Notes</label>
         <input asp-for="Notes" type="text" maxlength="25">
         <br />
         <button type="submit">Add New Film</button>
+
+        <div asp-validation-summary="All"></div>
     </form>
 </div>
 

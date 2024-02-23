@@ -7,7 +7,7 @@ namespace JN_Mission6.Models
         public MovieApplicationContext(DbContextOptions<MovieApplicationContext> options) : base (options) 
         { 
         }
-        public DbSet<MovieSubmit> Applications { get; set; }
+        public DbSet<MovieSubmit> Movies { get; set; }
         public DbSet<Category> Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) //seed
         {
