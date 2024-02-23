@@ -4,8 +4,8 @@ namespace JN_Mission6.Models
 {
     public class MovieApplicationContext : DbContext
     {
-        public MovieApplicationContext(DbContextOptions<MovieApplicationContext> options) : base (options) 
-        { 
+        public MovieApplicationContext(DbContextOptions<MovieApplicationContext> options) : base(options)
+        {
         }
         public DbSet<MovieSubmit> Movies { get; set; }
         public DbSet<Category> Categories { get; set; }
